@@ -2,6 +2,8 @@
 
 Hướng dẫn cài đặt Multi-Strategy Backtesting Platform.
 
+> 🌐 **Không muốn cài đặt?** Sử dụng trực tiếp tại: [https://multi-stragtegy-vnteam.streamlit.app/](https://multi-stragtegy-vnteam.streamlit.app/)
+
 ---
 
 ## 🚀 Quick Installation

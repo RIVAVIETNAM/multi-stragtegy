@@ -7,21 +7,21 @@ import streamlit as st
 import sys
 from pathlib import Path
 
-# Add project root to path
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
-# Load custom CSS
-from app.utils.ui_helpers import apply_custom_styling
-apply_custom_styling()
-
-# Page config
+# Page config MUST be first Streamlit command
 st.set_page_config(
     page_title="Multi-Strategy Backtesting Platform",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# Add project root to path
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
+
+# Load custom CSS (after page config)
+from app.utils.ui_helpers import apply_custom_styling
+apply_custom_styling()
 
 # Main page
 st.title("🇻🇳 Multi-Strategy Backtesting Platform")

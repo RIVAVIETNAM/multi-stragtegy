@@ -52,7 +52,23 @@ Instead of testing strategies one-by-one, this platform runs them **in parallel*
 
 ## 🚀 Quick Start
 
-### Installation
+### 🌐 Use Online (Recommended)
+
+**No installation needed!** Access the platform directly:
+
+🔗 **https://multi-stragtegy-vnteam.streamlit.app/**
+
+✅ **Advantages:**
+- No local setup required
+- Access from anywhere (computer, phone, tablet)
+- Always up-to-date
+- Share easily via link
+
+---
+
+### 💻 Run Locally
+
+#### Installation
 
 ```bash
 # Clone repository
@@ -65,7 +81,7 @@ pip install -r requirements.txt
 
 > 📖 **Detailed Installation:** See [Installation Guide](docs/INSTALLATION.md) for complete setup instructions.
 
-### Run Platform
+#### Run Platform
 
 ```bash
 # Launch Streamlit app
@@ -74,7 +90,7 @@ streamlit run streamlit/MAIN.py
 
 Access at: **http://localhost:8501**
 
-> 💡 **User Guide:** See [Streamlit Platform Guide](docs/guides/STREAMLIT_GUIDE.md) for detailed usage instructions.
+> 💡 **User Guide:** See [Streamlit Platform Guide](streamlit/STREAMLIT_GUIDE.md) for detailed usage instructions.
 
 ---
 
