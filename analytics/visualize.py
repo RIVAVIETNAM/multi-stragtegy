@@ -27,6 +27,32 @@ def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-S
     
     for idx, (name, res) in enumerate(results.items()):
         color = colors[idx % len(colors)]
+        
+        # Convert color to rgba safely
+        # px.colors.qualitative.Set2 returns RGB strings like 'rgb(102,194,165)'
+        try:
+            if isinstance(color, str):
+                if color.startswith('rgb('):
+                    # Parse RGB string: 'rgb(102,194,165)' -> (102, 194, 165)
+                    rgb_str = color.replace('rgb(', '').replace(')', '')
+                    rgb = tuple(int(x.strip()) for x in rgb_str.split(','))
+                    rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                elif color.startswith('#'):
+                    # Hex color: '#66c2a5'
+                    rgb = px.colors.hex_to_rgb(color)
+                    rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                else:
+                    # Named color or other format
+                    rgba_fill = 'rgba(128, 128, 128, 0.1)'
+            elif isinstance(color, (tuple, list)) and len(color) >= 3:
+                # Already RGB tuple
+                rgba_fill = f'rgba({color[0]}, {color[1]}, {color[2]}, 0.1)'
+            else:
+                rgba_fill = 'rgba(128, 128, 128, 0.1)'
+        except (ValueError, TypeError, AttributeError, IndexError):
+            # If conversion fails, use default gray
+            rgba_fill = 'rgba(128, 128, 128, 0.1)'
+        
         fig.add_trace(go.Scatter(
             x=res.equity_curve.index,
             y=res.equity_curve.values,
@@ -35,7 +61,7 @@ def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-S
             line=dict(width=3, color=color),
             hovertemplate=f'<b>{name}</b><br>Date: %{{x}}<br>Value: %{{y:,.0f}} VND<extra></extra>',
             fill='tonexty' if idx > 0 else None,
-            fillcolor=f'rgba{tuple(list(px.colors.hex_to_rgb(color)) + [0.1])}' if idx > 0 else None
+            fillcolor=rgba_fill if idx > 0 else None
         ))
     
     fig.update_layout(
