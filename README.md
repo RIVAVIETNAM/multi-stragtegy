@@ -56,7 +56,7 @@ Instead of testing strategies one-by-one, this platform runs them **in parallel*
 
 **No installation needed!** Access the platform directly:
 
-🔗 **https://multi-stragtegy-vnteam.streamlit.app/**
+🔗 **https://multi-stragtegy-vnteam10.streamlit.app/**
 
 ✅ **Advantages:**
 - No local setup required

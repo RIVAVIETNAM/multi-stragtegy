@@ -10,7 +10,7 @@
 **Không cần localhost!** Truy cập trực tiếp qua URL:
 
 ```
-🔗https://multi-stragtegy-vnteam.streamlit.app/
+🔗https://multi-stragtegy-vnteam10.streamlit.app/
 ```
 
 **Ưu điểm:**
@@ -48,7 +48,7 @@ streamlit run streamlit/MAIN.py
 > Chỉ khác nhau URL truy cập.
 
 ### Bước 1: Mở Platform
-- **Cloud:** Mở`https://multi-stragtegy-vnteam.streamlit.app/`
+- **Cloud:** Mở`https://multi-stragtegy-vnteam10.streamlit.app/`
 - **Local:** Chạy `streamlit run streamlit/MAIN.py` → `http://localhost:8502`
 
 ### Bước 2: Cấu hình (1 phút)
