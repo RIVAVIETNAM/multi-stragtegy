@@ -58,9 +58,8 @@ for idx, (name, info) in enumerate(STRATEGIES.items()):
                             key=f"{name}_{param}"
                         )
                 
-                # Store configured params
-                if f'params_{name}' not in st.session_state:
-                    st.session_state[f'params_{name}'] = params
+                # Store configured params (always update)
+                st.session_state[f'params_{name}'] = params
 
 st.session_state.selected_strategies = selected
 

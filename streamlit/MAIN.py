@@ -23,6 +23,10 @@ sys.path.insert(0, str(streamlit_dir))
 
 # Load custom CSS (after page config)
 try:
+    # Import from streamlit/app/utils/ui_helpers
+    app_utils_path = streamlit_dir / "app" / "utils"
+    if str(app_utils_path) not in sys.path:
+        sys.path.insert(0, str(app_utils_path.parent))
     from app.utils.ui_helpers import apply_custom_styling
     apply_custom_styling()
 except ImportError as e:

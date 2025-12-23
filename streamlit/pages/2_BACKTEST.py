@@ -113,12 +113,22 @@ with st.expander("📋 Execution Plan"):
 # Run button
 if st.button("🚀 RUN BACKTEST", type="primary", use_container_width=True):
     
-    # Prepare strategies
+    # Prepare strategies with configured params
     selected = st.session_state.selected_strategies
-    strategies_to_run = {
-        name: STRATEGIES[name]['function']
-        for name in selected
-    }
+    strategies_to_run = {}
+    
+    for name in selected:
+        strategy_func = STRATEGIES[name]['function']
+        # Get configured params from session state, or use defaults
+        params = st.session_state.get(f'params_{name}', STRATEGIES[name]['params'])
+        
+        # Wrap function to pass params (use default parameter to capture in closure)
+        def make_strategy_wrapper(func, strategy_params):
+            def wrapper(data, params=strategy_params):
+                return func(data, **params)
+            return wrapper
+        
+        strategies_to_run[name] = make_strategy_wrapper(strategy_func, params)
     
     # Execute
     with st.spinner("⏳ Running parallel backtests..."):
