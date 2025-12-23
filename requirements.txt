@@ -1,0 +1,28 @@
+# Core Data Science
+pandas>=2.2.0
+numpy>=1.26.0
+scipy>=1.14.0
+
+# Vietnamese Market Data
+vnstock>=3.0.0
+requests>=2.32.0
+
+# Technical Analysis
+ta>=0.11.0
+scikit-learn>=1.5.0
+
+# Optimization
+optuna>=4.0.0
+
+# Web Interface
+streamlit>=1.40.0
+
+# Visualization
+plotly>=5.24.0
+matplotlib>=3.9.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Utils
+python-dotenv>=1.0.0
