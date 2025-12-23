@@ -1,0 +1,7 @@
+# Optional Dependencies
+# These are only needed for specific features
+
+# AI Strategy Generator
+# Install with: pip install google-generativeai
+google-generativeai
+

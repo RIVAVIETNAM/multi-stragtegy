@@ -11,7 +11,7 @@ from engine.backtest import BacktestResult
 
 def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-Strategy Equity Curves") -> go.Figure:
     """
-    Create overlay plot of all strategy equity curves
+    Create overlay plot of all strategy equity curves with enhanced styling
     
     Args:
         results: Dict of BacktestResults
@@ -22,30 +22,60 @@ def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-S
     """
     fig = go.Figure()
     
-    for name, res in results.items():
+    # Color palette for strategies
+    colors = px.colors.qualitative.Set2
+    
+    for idx, (name, res) in enumerate(results.items()):
+        color = colors[idx % len(colors)]
         fig.add_trace(go.Scatter(
             x=res.equity_curve.index,
             y=res.equity_curve.values,
             name=name,
             mode='lines',
-            line=dict(width=2),
-            hovertemplate='%{y:,.0f} VND<extra></extra>'
+            line=dict(width=3, color=color),
+            hovertemplate=f'<b>{name}</b><br>Date: %{{x}}<br>Value: %{{y:,.0f}} VND<extra></extra>',
+            fill='tonexty' if idx > 0 else None,
+            fillcolor=f'rgba{tuple(list(px.colors.hex_to_rgb(color)) + [0.1])}' if idx > 0 else None
         ))
     
     fig.update_layout(
-        title=title,
-        xaxis_title='Date',
-        yaxis_title='Portfolio Value (VND)',
+        title=dict(
+            text=title,
+            font=dict(size=20, color='#1f77b4'),
+            x=0.5,
+            xanchor='center'
+        ),
+        xaxis=dict(
+            title='Date',
+            showgrid=True,
+            gridcolor='rgba(128, 128, 128, 0.2)',
+            showline=True,
+            linecolor='rgba(128, 128, 128, 0.5)'
+        ),
+        yaxis=dict(
+            title='Portfolio Value (VND)',
+            showgrid=True,
+            gridcolor='rgba(128, 128, 128, 0.2)',
+            showline=True,
+            linecolor='rgba(128, 128, 128, 0.5)',
+            tickformat=',.0f'
+        ),
         hovermode='x unified',
         template='plotly_white',
-        height=500,
+        height=600,
+        plot_bgcolor='rgba(255, 255, 255, 0.9)',
+        paper_bgcolor='white',
         legend=dict(
             orientation="h",
             yanchor="bottom",
             y=1.02,
             xanchor="right",
-            x=1
-        )
+            x=1,
+            bgcolor='rgba(255, 255, 255, 0.8)',
+            bordercolor='rgba(128, 128, 128, 0.3)',
+            borderwidth=1
+        ),
+        margin=dict(l=60, r=20, t=80, b=60)
     )
     
     return fig
@@ -53,7 +83,7 @@ def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-S
 
 def plot_drawdown(result: BacktestResult) -> go.Figure:
     """
-    Plot drawdown chart for a single strategy
+    Plot drawdown chart for a single strategy with enhanced styling
     """
     equity = result.equity_curve
     peak = equity.expanding().max()
@@ -61,22 +91,54 @@ def plot_drawdown(result: BacktestResult) -> go.Figure:
     
     fig = go.Figure()
     
+    # Use gradient fill for drawdown
     fig.add_trace(go.Scatter(
         x=drawdown.index,
         y=drawdown.values,
         fill='tozeroy',
         name='Drawdown',
-        line=dict(color='red', width=1),
-        hovertemplate='%{y:.2f}%<extra></extra>'
+        line=dict(color='#d62728', width=2),
+        fillcolor='rgba(214, 39, 40, 0.3)',
+        hovertemplate=f'<b>{result.strategy_name}</b><br>Date: %{{x}}<br>Drawdown: %{{y:.2f}}%<extra></extra>'
     ))
     
+    # Add max drawdown line
+    max_dd = drawdown.min()
+    max_dd_date = drawdown.idxmin()
+    fig.add_annotation(
+        x=max_dd_date,
+        y=max_dd,
+        text=f'Max DD: {max_dd:.2f}%',
+        showarrow=True,
+        arrowhead=2,
+        arrowcolor='#d62728',
+        bgcolor='rgba(214, 39, 40, 0.8)',
+        bordercolor='#d62728',
+        font=dict(color='white', size=12)
+    )
+    
     fig.update_layout(
-        title=f"Drawdown - {result.strategy_name}",
-        xaxis_title='Date',
-        yaxis_title='Drawdown (%)',
+        title=dict(
+            text=f"Drawdown Analysis - {result.strategy_name}",
+            font=dict(size=18, color='#d62728'),
+            x=0.5,
+            xanchor='center'
+        ),
+        xaxis=dict(
+            title='Date',
+            showgrid=True,
+            gridcolor='rgba(128, 128, 128, 0.2)'
+        ),
+        yaxis=dict(
+            title='Drawdown (%)',
+            showgrid=True,
+            gridcolor='rgba(128, 128, 128, 0.2)'
+        ),
         hovermode='x',
         template='plotly_white',
-        height=400
+        height=450,
+        plot_bgcolor='rgba(255, 255, 255, 0.9)',
+        paper_bgcolor='white'
     )
     
     return fig

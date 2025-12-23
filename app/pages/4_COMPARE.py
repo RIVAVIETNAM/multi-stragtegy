@@ -13,6 +13,7 @@ sys.path.insert(0, str(project_root))
 
 from analytics.leaderboard import create_leaderboard, get_best_strategy, create_summary_stats
 from analytics.visualize import plot_metrics_comparison
+from analytics.strategy_matrix import create_strategy_matrix
 
 st.title("🏆 Strategy Leaderboard")
 
@@ -92,13 +93,33 @@ with col2:
 
 st.markdown("---")
 
-# Radar chart comparison
-st.subheader("📡 Multi-Metric Comparison")
+# Strategy Performance Matrix (RRG-style)
+st.subheader("📊 Strategy Performance Matrix")
 
 if len(results) > 1:
-    fig_radar = plot_metrics_comparison(results)
-    st.plotly_chart(fig_radar, use_container_width=True)
-    st.caption("Normalized radar chart showing relative performance across key metrics")
+    tab1, tab2 = st.tabs(["🎯 Performance Matrix (RRG)", "📡 Radar Chart"])
+    
+    with tab1:
+        try:
+            fig_matrix = create_strategy_matrix(results)
+            st.plotly_chart(fig_matrix, use_container_width=True)
+            st.caption("""
+            **Quadrant Guide:**
+            - 🟢 **Leading:** High RS, Positive Momentum (Best performers)
+            - 🟠 **Weakening:** High RS, Negative Momentum (Losing strength)
+            - 🔴 **Lagging:** Low RS, Negative Momentum (Underperformers)
+            - 🔵 **Improving:** Low RS, Positive Momentum (Recovering)
+            """)
+        except Exception as e:
+            st.warning(f"Could not create matrix: {str(e)}")
+            st.info("Falling back to simple comparison...")
+            fig_matrix = create_strategy_matrix(results)
+            st.plotly_chart(fig_matrix, use_container_width=True)
+    
+    with tab2:
+        fig_radar = plot_metrics_comparison(results)
+        st.plotly_chart(fig_radar, use_container_width=True)
+        st.caption("Normalized radar chart showing relative performance across key metrics")
 
 st.markdown("---")
 

@@ -11,6 +11,10 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+# Load custom CSS
+from app.utils.ui_helpers import apply_custom_styling
+apply_custom_styling()
+
 # Page config
 st.set_page_config(
     page_title="Multi-Strategy Backtesting Platform",

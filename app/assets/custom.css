@@ -1,0 +1,380 @@
+/* ============================================
+   Multi-Strategy Backtesting Platform
+   Custom CSS - Institutional Design System
+   Inspired by FC-Terminal design concepts
+   ============================================ */
+
+/* Root Variables */
+:root {
+    --primary-color: #1f77b4;
+    --secondary-color: #ff7f0e;
+    --success-color: #2ca02c;
+    --danger-color: #d62728;
+    --warning-color: #ffbb33;
+    --info-color: #17a2b8;
+    --dark-bg: #0e1117;
+    --card-bg: #262730;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #3a3a4a;
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Main Container */
+.main .block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 1400px;
+}
+
+/* Headers */
+h1 {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+h3 {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Cards & Metrics */
+[data-testid="stMetricValue"] {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+[data-testid="stMetricDelta"] {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Buttons */
+.stButton > button {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
+}
+
+/* Primary Button */
+.stButton > button[kind="primary"] {
+    background: var(--gradient-success);
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+}
+
+/* Info Boxes */
+.stAlert {
+    border-radius: 10px;
+    border-left: 4px solid;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.stAlert[data-baseweb="notification"] {
+    background-color: rgba(23, 162, 184, 0.1);
+    border-color: var(--info-color);
+}
+
+/* Expanders */
+.streamlit-expanderHeader {
+    font-weight: 600;
+    color: var(--text-primary);
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.streamlit-expanderContent {
+    padding: 1rem;
+    background: rgba(38, 39, 48, 0.5);
+    border-radius: 8px;
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+    border-right: 1px solid var(--border-color);
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+    color: var(--text-primary);
+}
+
+/* Dataframes */
+[data-testid="stDataFrame"] {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+/* Tabs */
+[data-baseweb="tab-list"] {
+    background: rgba(38, 39, 48, 0.5);
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+[data-baseweb="tab"] {
+    color: var(--text-secondary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+[data-baseweb="tab"][aria-selected="true"] {
+    color: var(--primary-color);
+    background: rgba(31, 119, 180, 0.2);
+}
+
+/* Charts Container */
+.plotly {
+    border-radius: 10px;
+    box-shadow: var(--shadow-md);
+    background: white;
+    padding: 1rem;
+}
+
+/* Custom Cards */
+.strategy-card {
+    background: rgba(38, 39, 48, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.strategy-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+/* Performance Badge */
+.performance-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0.25rem;
+}
+
+.performance-badge.excellent {
+    background: var(--gradient-success);
+    color: white;
+}
+
+.performance-badge.good {
+    background: rgba(44, 160, 44, 0.3);
+    color: #2ca02c;
+}
+
+.performance-badge.poor {
+    background: rgba(214, 39, 40, 0.3);
+    color: #d62728;
+}
+
+/* Leaderboard Styling */
+.leaderboard-row {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background 0.2s ease;
+}
+
+.leaderboard-row:hover {
+    background: rgba(102, 126, 234, 0.1);
+}
+
+.leaderboard-rank {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Metric Cards */
+.metric-card {
+    background: rgba(38, 39, 48, 0.6);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.metric-card:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.02);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.metric-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(38, 39, 48, 0.5);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+/* Loading Spinner */
+.stSpinner > div {
+    border-color: var(--primary-color) transparent transparent transparent;
+}
+
+/* Success Messages */
+.stSuccess {
+    background: rgba(44, 160, 44, 0.2);
+    border-left: 4px solid var(--success-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Warning Messages */
+.stWarning {
+    background: rgba(255, 187, 51, 0.2);
+    border-left: 4px solid var(--warning-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Error Messages */
+.stError {
+    background: rgba(214, 39, 40, 0.2);
+    border-left: 4px solid var(--danger-color);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+/* Code Blocks */
+.stCodeBlock {
+    background: rgba(14, 17, 23, 0.8);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* Radio Buttons */
+.stRadio > label {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Selectbox */
+[data-baseweb="select"] {
+    background: rgba(38, 39, 48, 0.6);
+    border-color: var(--border-color);
+    border-radius: 8px;
+}
+
+/* Input Fields */
+.stTextInput > div > div > input {
+    background: rgba(38, 39, 48, 0.6);
+    border-color: var(--border-color);
+    border-radius: 8px;
+    color: var(--text-primary);
+}
+
+/* Divider */
+hr {
+    border-color: var(--border-color);
+    margin: 2rem 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+

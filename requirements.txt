@@ -26,3 +26,7 @@ sqlalchemy
 
 # Utils
 python-dotenv
+
+# AI Strategy Generator (OPTIONAL - only needed for AI Strategy Generator feature)
+# Uncomment the line below if you want to use AI Strategy Generator
+# google-generativeai
