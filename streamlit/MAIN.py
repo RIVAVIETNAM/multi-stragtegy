@@ -17,11 +17,17 @@ st.set_page_config(
 
 # Add project root to path
 project_root = Path(__file__).parent.parent
+streamlit_dir = Path(__file__).parent
 sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(streamlit_dir))
 
 # Load custom CSS (after page config)
-from app.utils.ui_helpers import apply_custom_styling
-apply_custom_styling()
+try:
+    from app.utils.ui_helpers import apply_custom_styling
+    apply_custom_styling()
+except ImportError as e:
+    # Fallback if CSS loading fails
+    st.warning(f"Could not load custom CSS: {e}")
 
 # Main page
 st.title("🇻🇳 Multi-Strategy Backtesting Platform")

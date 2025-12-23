@@ -9,10 +9,18 @@ from pathlib import Path
 
 def load_custom_css():
     """Load custom CSS file"""
-    css_file = Path(__file__).parent.parent / "assets" / "custom.css"
-    if css_file.exists():
-        with open(css_file, "r", encoding="utf-8") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    try:
+        # Try relative to utils folder
+        css_file = Path(__file__).parent.parent / "assets" / "custom.css"
+        if not css_file.exists():
+            # Try alternative path
+            css_file = Path(__file__).parent.parent.parent / "app" / "assets" / "custom.css"
+        if css_file.exists():
+            with open(css_file, "r", encoding="utf-8") as f:
+                st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+    except Exception as e:
+        # Silently fail if CSS can't be loaded
+        pass
 
 
 def render_metric_card(label: str, value: str, delta: str = None, delta_color: str = "normal"):
