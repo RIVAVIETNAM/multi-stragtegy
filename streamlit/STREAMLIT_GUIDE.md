@@ -33,7 +33,7 @@
 cd "6 new project"
 streamlit run streamlit/MAIN.py
 ```
-→ Mở browser: **http://localhost:8502**
+→ Mở browser: **http://localhost:8501**
 
 **Khi nào cần local:**
 - Khi đang phát triển/sửa code
@@ -49,7 +49,7 @@ streamlit run streamlit/MAIN.py
 
 ### Bước 1: Mở Platform
 - **Cloud:** Mở`https://multi-stragtegy-vnteam10.streamlit.app/`
-- **Local:** Chạy `streamlit run streamlit/MAIN.py` → `http://localhost:8502`
+- **Local:** Chạy `streamlit run streamlit/MAIN.py` → `http://localhost:8501`
 
 ### Bước 2: Cấu hình (1 phút)
 1. Click **CONFIGURE** ở sidebar
@@ -70,6 +70,19 @@ streamlit run streamlit/MAIN.py
 ---
 
 ## 📱 GIAO DIỆN TỔNG QUAN
+
+### 🎨 Theme & Design
+
+**Light Theme (Mặc định):**
+- ✅ Nền sáng, dễ nhìn
+- ✅ Sidebar màu xám nhạt
+- ✅ Text màu đen trên nền trắng
+- ✅ Contrast tốt, dễ đọc
+- ✅ Modern, professional design
+
+**Tùy chỉnh:**
+- Theme được cấu hình trong `.streamlit/config.toml`
+- CSS tùy chỉnh trong `streamlit/app/assets/custom.css`
 
 ### Sidebar (Menu bên trái)
 
@@ -582,7 +595,7 @@ Chiến lược tốt = Return cao + Sharpe > 1 + Drawdown thấp
 
 - [ ] **1. Start** 
   - Chạy `streamlit run streamlit/MAIN.py`
-  - Mở http://localhost:8502
+  - Mở http://localhost:8501
 
 - [ ] **2. CONFIGURE (5 phút)**
   - Tick 4 strategies
@@ -666,10 +679,10 @@ Chiến lược tốt = Return cao + Sharpe > 1 + Drawdown thấp
 **Giải pháp:** Nhấn **Ctrl + Shift + R** để hard reload
 
 ### Lỗi 5: Streamlit không mở
-**Nguyên nhân:** Port 8502 bị chiếm
+**Nguyên nhân:** Port 8501 bị chiếm
 **Giải pháp:**
 ```bash
-streamlit run streamlit/MAIN.py --server.port 8503
+streamlit run streamlit/MAIN.py --server.port 8502
 ```
 
 ---
