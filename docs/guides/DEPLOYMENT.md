@@ -106,7 +106,7 @@ git push
 ```
 Repository: RIVAVIETNAM/multi-stragtegy
 Branch: main
-Main file path: streamlit/MAIN.py
+Main file path: streamlit/MAIN.py  ⚠️ QUAN TRỌNG: Phải là streamlit/MAIN.py (KHÔNG phải app/MAIN.py)
 App URL (optional): multi-strategy-backtest (hoặc tên khác)
 ```
 
