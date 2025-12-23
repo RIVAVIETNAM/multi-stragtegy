@@ -1,4 +1,5 @@
 # 📖 HƯỚNG DẪN SỬ DỤNG
+
 ## Nền tảng Backtesting Đa Chiến Lược - Multi-Strategy Backtesting Platform
 
 ---
@@ -471,16 +472,6 @@ pip install plotly
 ```bash
 streamlit run app/main.py --server.port 8502
 ```
-
----
-
-## 📞 HỖ TRỢ
-
-**Tài liệu:**
-
-- `README.md` - Tổng quan dự án
-- `QUICKSTART.md` - Hướng dẫn nhanh
-- `implementation_plan.md` - Chi tiết kỹ thuật
 
 ---
 
