@@ -30,27 +30,39 @@ def plot_equity_curves(results: Dict[str, BacktestResult], title: str = "Multi-S
         
         # Convert color to rgba safely
         # px.colors.qualitative.Set2 returns RGB strings like 'rgb(102,194,165)'
+        rgba_fill = None
         try:
             if isinstance(color, str):
-                if color.startswith('rgb('):
+                if color.startswith('rgb(') and color.endswith(')'):
                     # Parse RGB string: 'rgb(102,194,165)' -> (102, 194, 165)
-                    rgb_str = color.replace('rgb(', '').replace(')', '')
-                    rgb = tuple(int(x.strip()) for x in rgb_str.split(','))
-                    rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                    rgb_str = color[4:-1]  # Remove 'rgb(' and ')'
+                    rgb_parts = rgb_str.split(',')
+                    if len(rgb_parts) == 3:
+                        rgb = tuple(int(x.strip()) for x in rgb_parts)
+                        rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                    else:
+                        rgba_fill = 'rgba(128, 128, 128, 0.1)'
                 elif color.startswith('#'):
                     # Hex color: '#66c2a5'
-                    rgb = px.colors.hex_to_rgb(color)
-                    rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                    try:
+                        rgb = px.colors.hex_to_rgb(color)
+                        rgba_fill = f'rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, 0.1)'
+                    except (ValueError, TypeError):
+                        rgba_fill = 'rgba(128, 128, 128, 0.1)'
                 else:
-                    # Named color or other format
+                    # Named color or other format - use default
                     rgba_fill = 'rgba(128, 128, 128, 0.1)'
             elif isinstance(color, (tuple, list)) and len(color) >= 3:
                 # Already RGB tuple
                 rgba_fill = f'rgba({color[0]}, {color[1]}, {color[2]}, 0.1)'
             else:
                 rgba_fill = 'rgba(128, 128, 128, 0.1)'
-        except (ValueError, TypeError, AttributeError, IndexError):
+        except (ValueError, TypeError, AttributeError, IndexError) as e:
             # If conversion fails, use default gray
+            rgba_fill = 'rgba(128, 128, 128, 0.1)'
+        
+        # Ensure rgba_fill is set
+        if rgba_fill is None:
             rgba_fill = 'rgba(128, 128, 128, 0.1)'
         
         fig.add_trace(go.Scatter(
