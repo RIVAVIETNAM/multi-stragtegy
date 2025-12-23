@@ -8,7 +8,7 @@ Hướng dẫn deploy Multi-Strategy Backtesting Platform lên Streamlit Cloud �
 
 - [x] Code đã push lên GitHub: https://github.com/RIVAVIETNAM/multi-stragtegy
 - [x] File `requirements.txt` đã có
-- [x] File `app/MAIN.py` là entry point
+- [x] File `streamlit/MAIN.py` là entry point
 - [x] Tất cả dependencies đã list trong requirements.txt
 
 ---
@@ -106,7 +106,7 @@ git push
 ```
 Repository: RIVAVIETNAM/multi-stragtegy
 Branch: main
-Main file path: app/MAIN.py
+Main file path: streamlit/MAIN.py
 App URL (optional): multi-strategy-backtest (hoặc tên khác)
 ```
 
@@ -295,7 +295,7 @@ git push
 
 **Giải pháp:**
 1. Xem logs trong Streamlit Cloud
-2. Test local trước: `streamlit run app/MAIN.py`
+2. Test local trước: `streamlit run streamlit/MAIN.py`
 3. Fix bugs và push lại
 
 ---
@@ -356,7 +356,7 @@ if password != "your_secret_password":
 - [ ] Tạo new app
 - [ ] Chọn repo: RIVAVIETNAM/multi-stragtegy
 - [ ] Branch: main
-- [ ] Main file: app/MAIN.py
+- [ ] Main file: streamlit/MAIN.py
 - [ ] Click Deploy
 - [ ] Đợi 2-5 phút
 - [ ] Test app trên URL public
@@ -376,7 +376,7 @@ if password != "your_secret_password":
 ## 💡 TIPS
 
 ### Tip 1: Test local trước
-Luôn chạy `streamlit run app/MAIN.py` local trước khi deploy
+Luôn chạy `streamlit run streamlit/MAIN.py` local trước khi deploy
 
 ### Tip 2: Pin versions
 Thay `package>=1.0.0` bằng `package==1.2.3` để tránh breaking changes

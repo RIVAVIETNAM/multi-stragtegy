@@ -31,7 +31,7 @@
 
 ```bash
 cd "6 new project"
-streamlit run app/MAIN.py
+streamlit run streamlit/MAIN.py
 ```
 → Mở browser: **http://localhost:8502**
 
@@ -49,7 +49,7 @@ streamlit run app/MAIN.py
 
 ### Bước 1: Mở Platform
 - **Cloud:** Mở`https://multi-stragtegy-vnteam.streamlit.app/`
-- **Local:** Chạy `streamlit run app/MAIN.py` → `http://localhost:8502`
+- **Local:** Chạy `streamlit run streamlit/MAIN.py` → `http://localhost:8502`
 
 ### Bước 2: Cấu hình (1 phút)
 1. Click **CONFIGURE** ở sidebar
@@ -581,7 +581,7 @@ Chiến lược tốt = Return cao + Sharpe > 1 + Drawdown thấp
 ### Lần đầu tiên (30 phút)
 
 - [ ] **1. Start** 
-  - Chạy `streamlit run app/MAIN.py`
+  - Chạy `streamlit run streamlit/MAIN.py`
   - Mở http://localhost:8502
 
 - [ ] **2. CONFIGURE (5 phút)**
@@ -669,7 +669,7 @@ Chiến lược tốt = Return cao + Sharpe > 1 + Drawdown thấp
 **Nguyên nhân:** Port 8502 bị chiếm
 **Giải pháp:**
 ```bash
-streamlit run app/MAIN.py --server.port 8503
+streamlit run streamlit/MAIN.py --server.port 8503
 ```
 
 ---

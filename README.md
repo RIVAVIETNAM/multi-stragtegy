@@ -63,14 +63,18 @@ cd "6 new project"
 pip install -r requirements.txt
 ```
 
+> 📖 **Detailed Installation:** See [Installation Guide](docs/INSTALLATION.md) for complete setup instructions.
+
 ### Run Platform
 
 ```bash
 # Launch Streamlit app
-streamlit run app/main.py
+streamlit run streamlit/MAIN.py
 ```
 
 Access at: **http://localhost:8501**
+
+> 💡 **User Guide:** See [Streamlit Platform Guide](docs/guides/STREAMLIT_GUIDE.md) for detailed usage instructions.
 
 ---
 
@@ -143,9 +147,17 @@ Based on our academic research, the platform addresses:
 ├── strategies/        # Strategy definitions
 ├── engine/            # Backtest engine
 ├── analytics/         # Visualization
-├── app/               # Streamlit UI
+├── streamlit/         # Streamlit application
+│   ├── MAIN.py        # Main app (entry point)
+│   └── app/           # Streamlit UI components
+│       ├── assets/    # Custom CSS & assets
+│       ├── pages/     # Streamlit pages
+│       └── utils/     # UI helpers
 ├── tests/             # Unit tests
 └── docs/              # Documentation
+    ├── guides/        # User guides
+    ├── features/      # Feature documentation
+    └── analysis/      # Analysis & research
 ```
 
 ---
@@ -163,9 +175,18 @@ Based on our academic research, the platform addresses:
 
 ## 📝 Documentation
 
+### 📖 User Guides
+- [Installation Guide](docs/INSTALLATION.md)
 - [User Guide (Vietnamese)](docs/USER_GUIDE_VI.md)
-- [API Documentation](docs/API_DOCS.md)
-- [Research Paper](docs/RESEARCH_PAPER.md)
+- [Streamlit Platform Guide](docs/guides/STREAMLIT_GUIDE.md)
+- [Deployment Guide](docs/guides/DEPLOYMENT.md)
+
+### ✨ Features
+- [New Features Guide](docs/features/FEATURES_GUIDE.md)
+- [AI Strategy Generator FAQ](docs/features/WHY_GOOGLE_GENERATIVEAI.md)
+
+### 🔍 Analysis
+- [FC-Terminal Compatibility Analysis](docs/analysis/FC_TERMINAL_COMPATIBILITY.md)
 
 ---
 

@@ -10,7 +10,7 @@
 
 ```bash
 cd "D:\OneDrive\2026\IPITEX\10 Multi-Strategy Backtesting Platform\6 new project"
-streamlit run app/main.py
+streamlit run streamlit/MAIN.py
 ```
 
 Ứng dụng sẽ mở tại: **http://localhost:8501**
@@ -470,7 +470,7 @@ pip install plotly
 **Giải pháp:**
 
 ```bash
-streamlit run app/main.py --server.port 8502
+streamlit run streamlit/MAIN.py --server.port 8502
 ```
 
 ---

@@ -1,13 +1,15 @@
 # 🚀 Hướng Dẫn Sử Dụng Các Tính Năng Mới
 
-## Tổng Quan Các Cải Tiến
+## 📋 Tóm Tắt
 
 Dự án đã được nâng cấp với các tính năng lấy cảm hứng từ FC-Terminal:
 
 1. ✅ **Custom UI/UX** - Giao diện hiện đại với CSS tùy chỉnh
-2. ✅ **AI Strategy Generator** - Tạo chiến lược từ mô tả ngôn ngữ tự nhiên
+2. ✅ **AI Strategy Generator** - Tạo chiến lược từ mô tả ngôn ngữ tự nhiên (Optional)
 3. ✅ **Enhanced Visualizations** - Charts đẹp hơn với Plotly
 4. ✅ **Strategy Performance Matrix** - RRG-style visualization
+
+**Tất cả tính năng đã sẵn sàng sử dụng!** 🎉
 
 ---
 
@@ -45,10 +47,12 @@ Custom CSS đã được tự động load khi chạy ứng dụng. Không cần
    ```bash
    pip install google-generativeai
    ```
-   Hoặc:
-   ```bash
-   pip install -r requirements-optional.txt
-   ```
+   
+   **Hoặc uncomment trong requirements.txt:**
+   - Mở `requirements.txt`
+   - Tìm dòng `# google-generativeai>=0.3.0`
+   - Uncomment (xóa dấu `#`)
+   - Chạy: `pip install -r requirements.txt`
 
 2. **Google Gemini API Key**
    - Đăng ký tại: https://makersuite.google.com/app/apikey
@@ -94,6 +98,8 @@ Custom CSS đã được tự động load khi chạy ứng dụng. Không cần
 - **Be Specific:** Nêu rõ indicator, period, threshold
 - **Use Standard Indicators:** RSI, MACD, Bollinger Bands, SMA, EMA
 - **Describe Entry/Exit:** Rõ ràng khi nào buy/sell
+
+**Xem thêm:** [Why Google Generative AI?](../features/WHY_GOOGLE_GENERATIVEAI.md)
 
 ---
 
@@ -192,30 +198,11 @@ pip install -r requirements-optional.txt
 
 ---
 
-## 🔧 Cấu Hình
-
-### Environment Variables (Optional)
-
-Tạo file `.env` hoặc set environment variables:
-
-```bash
-# .env file
-GEMINI_API_KEY=your_api_key_here
-```
-
-Hoặc trong PowerShell (Windows):
-
-```powershell
-$env:GEMINI_API_KEY="your_api_key_here"
-```
-
----
-
 ## 🚀 Chạy Ứng Dụng
 
 ```bash
 cd "6 new project"
-streamlit run app/MAIN.py
+streamlit run streamlit/MAIN.py
 ```
 
 Truy cập: http://localhost:8501
@@ -230,7 +217,6 @@ Truy cập: http://localhost:8501
 │   ├── assets/
 │   │   └── custom.css          # Custom CSS styles
 │   ├── utils/
-│   │   ├── __init__.py
 │   │   └── ui_helpers.py       # UI helper functions
 │   └── pages/
 │       └── 5_AI_STRATEGY_GENERATOR.py  # AI Generator page
@@ -238,7 +224,7 @@ Truy cập: http://localhost:8501
 │   └── strategy_matrix.py      # RRG-style matrix
 ├── strategies/
 │   └── ai_generator.py         # AI strategy generator
-└── requirements.txt             # Updated dependencies
+└── requirements-optional.txt  # Optional dependencies
 ```
 
 ---
@@ -295,13 +281,14 @@ Truy cập: http://localhost:8501
 - [Google Gemini API Docs](https://ai.google.dev/docs)
 - [Plotly Python Documentation](https://plotly.com/python/)
 - [Streamlit Custom Components](https://docs.streamlit.io/library/components)
+- [FC-Terminal Compatibility Analysis](../analysis/FC_TERMINAL_COMPATIBILITY.md)
 
 ---
 
 ## ✅ Checklist Sử Dụng
 
-- [ ] Cài đặt `google-generativeai`
-- [ ] Lấy Gemini API key
+- [ ] Cài đặt `google-generativeai` (nếu cần AI Generator)
+- [ ] Lấy Gemini API key (nếu cần AI Generator)
 - [ ] Test AI Strategy Generator
 - [ ] Xem Strategy Performance Matrix
 - [ ] Review enhanced visualizations

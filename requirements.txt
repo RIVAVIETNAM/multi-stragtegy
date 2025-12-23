@@ -1,32 +1,56 @@
+# ============================================
+# Multi-Strategy Backtesting Platform
+# Dependencies
+# ============================================
+#
+# Install with: pip install -r requirements.txt
+#
+# Optional dependencies are marked with [OPTIONAL]
+# Uncomment them if you need those features.
+#
+
+# ============================================
+# Core Dependencies (Required)
+# ============================================
+
 # Core Data Science
-pandas
-numpy
-scipy
+pandas>=1.5.0
+numpy>=1.21.0
+scipy>=1.9.0
 
 # Vietnamese Market Data
-vnstock
-requests
+vnstock>=0.2.0
+requests>=2.28.0
 
 # Technical Analysis
-ta
-scikit-learn
+ta>=0.10.0
+scikit-learn>=1.1.0
 
 # Optimization
-optuna
+optuna>=3.0.0
 
 # Web Interface
-streamlit
+streamlit>=1.28.0
 
 # Visualization
-plotly
-matplotlib
+plotly>=5.14.0
+matplotlib>=3.6.0
 
 # Database
-sqlalchemy
+sqlalchemy>=2.0.0
 
 # Utils
-python-dotenv
+python-dotenv>=1.0.0
 
-# AI Strategy Generator (OPTIONAL - only needed for AI Strategy Generator feature)
-# Uncomment the line below if you want to use AI Strategy Generator
-# google-generativeai
+# ============================================
+# Optional Dependencies
+# ============================================
+# Uncomment the packages below if you need optional features
+#
+
+# [OPTIONAL] AI Strategy Generator
+# Required for: AI Strategy Generator feature
+# Allows generating trading strategies from natural language
+# Get API key: https://makersuite.google.com/app/apikey
+# Documentation: docs/features/FEATURES_GUIDE.md
+# google-generativeai>=0.3.0

@@ -160,3 +160,4 @@ st.success("""
 
 Start with **Configure** to set up your first backtest.
 """)
+
