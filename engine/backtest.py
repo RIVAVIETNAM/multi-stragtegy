@@ -62,51 +62,80 @@ def run_backtest(data: pd.DataFrame,
     equity = []
     trades_list = []
     
+    # Debug: Track signal positions
+    buy_signals = signals[signals == 1].index.tolist()
+    sell_signals = signals[signals == -1].index.tolist()
+    print(f"Backtest {strategy_name}:")
+    print(f"  - Buy signals at: {buy_signals[:5]}... (total: {len(buy_signals)})")
+    print(f"  - Sell signals at: {sell_signals[:5]}... (total: {len(sell_signals)})")
+    
     # Simulate trading
     for i in range(len(data)):
         price = data['close'].iloc[i]
         signal = signals.iloc[i]
         
+        # Check for NaN price
+        if pd.isna(price) or price <= 0:
+            portfolio_value = cash + (shares * (data['close'].iloc[i-1] if i > 0 else initial_capital))
+            equity.append(portfolio_value)
+            continue
+        
         # Buy signal
-        if signal == 1 and shares == 0:
-            # Calculate shares to buy (use all cash)
-            shares_to_buy = int(cash / price)
-            cost = shares_to_buy * price
-            fee = calculate_vn_transaction_cost(cost, transaction_cost)
-            
-            if cash >= (cost + fee):
-                shares = shares_to_buy
-                cash -= (cost + fee)
+        if signal == 1:
+            if shares == 0:
+                # Calculate shares to buy (use all cash)
+                shares_to_buy = int(cash / price)
+                if shares_to_buy > 0:
+                    cost = shares_to_buy * price
+                    fee = calculate_vn_transaction_cost(cost, transaction_cost)
+                    
+                    if cash >= (cost + fee):
+                        shares = shares_to_buy
+                        cash -= (cost + fee)
+                        
+                        trades_list.append({
+                            'date': data.index[i],
+                            'type': 'BUY',
+                            'price': price,
+                            'shares': shares,
+                            'cost': cost + fee
+                        })
+                        print(f"  - BUY at {data.index[i]}: {shares} shares @ {price:.2f}, cost: {cost+fee:.2f}, cash left: {cash:.2f}")
+            else:
+                # Already have shares, ignore buy signal
+                pass
+        
+        # Sell signal
+        elif signal == -1:
+            if shares > 0:
+                # Sell all shares
+                proceeds = shares * price
+                fee = calculate_vn_transaction_cost(proceeds, transaction_cost)
+                
+                cash += (proceeds - fee)
                 
                 trades_list.append({
                     'date': data.index[i],
-                    'type': 'BUY',
+                    'type': 'SELL',
                     'price': price,
                     'shares': shares,
-                    'cost': cost + fee
+                    'proceeds': proceeds - fee
                 })
-        
-        # Sell signal
-        elif signal == -1 and shares > 0:
-            # Sell all shares
-            proceeds = shares * price
-            fee = calculate_vn_transaction_cost(proceeds, transaction_cost)
-            
-            cash += (proceeds - fee)
-            
-            trades_list.append({
-                'date': data.index[i],
-                'type': 'SELL',
-                'price': price,
-                'shares': shares,
-                'proceeds': proceeds - fee
-            })
-            
-            shares = 0
+                
+                profit = (proceeds - fee) - trades_list[-2]['cost'] if len(trades_list) >= 2 else 0
+                print(f"  - SELL at {data.index[i]}: {shares} shares @ {price:.2f}, proceeds: {proceeds-fee:.2f}, profit: {profit:.2f}")
+                
+                shares = 0
+            else:
+                # No shares to sell, ignore sell signal
+                pass
         
         # Record equity
         portfolio_value = cash + (shares * price)
         equity.append(portfolio_value)
+    
+    print(f"  - Total trades executed: {len(trades_list)}")
+    print(f"  - Final cash: {cash:.2f}, Final shares: {shares}")
     
     # Create equity curve
     equity_curve = pd.Series(equity, index=data.index)

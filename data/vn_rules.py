@@ -20,15 +20,17 @@ def enforce_price_band(data: pd.DataFrame, limit: float = 0.07) -> pd.DataFrame:
     """
     if 'prev_close' not in data.columns:
         data['prev_close'] = data['close'].shift(1)
+        # Fill first row with first close price
+        data['prev_close'].iloc[0] = data['close'].iloc[0]
     
     # Calculate floor and ceiling
     data['floor_price'] = data['prev_close'] * (1 - limit)
     data['ceiling_price'] = data['prev_close'] * (1 + limit)
     
-    # Clip close price to allowed range
+    # Clip close price to allowed range (handle NaN)
     data['close'] = data['close'].clip(
-        lower=data['floor_price'],
-        upper=data['ceiling_price']
+        lower=data['floor_price'].fillna(data['close']),
+        upper=data['ceiling_price'].fillna(data['close'])
     )
     
     # Also clip high/low if they exist
