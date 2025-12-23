@@ -191,11 +191,46 @@ def run_parallel_backtests(data: pd.DataFrame,
         Dict of {strategy_name: BacktestResult}
     """
     def run_single_strategy(name: str, strategy_func: Callable):
-        signals = strategy_func(data)
-        return name, run_backtest(
-            data, signals, name, 
-            initial_capital, transaction_cost, enforce_vn_rules
-        )
+        try:
+            signals = strategy_func(data)
+            
+            # Validate signals
+            if signals is None or len(signals) == 0:
+                raise ValueError(f"Strategy {name} returned empty signals")
+            
+            if not isinstance(signals, pd.Series):
+                raise ValueError(f"Strategy {name} must return pd.Series, got {type(signals)}")
+            
+            # Check if signals match data index
+            if not signals.index.equals(data.index):
+                # Try to align signals with data index
+                signals = signals.reindex(data.index, fill_value=0)
+            
+            result = run_backtest(
+                data, signals, name, 
+                initial_capital, transaction_cost, enforce_vn_rules
+            )
+            return name, result
+        except Exception as e:
+            # Return empty result on error
+            import traceback
+            print(f"Error in strategy {name}: {e}")
+            print(traceback.format_exc())
+            # Return a result with zeros
+            empty_equity = pd.Series([initial_capital] * len(data), index=data.index)
+            empty_trades = pd.DataFrame(columns=['date', 'type', 'price', 'shares', 'cost'])
+            from engine.backtest import BacktestResult
+            return name, BacktestResult(
+                strategy_name=name,
+                equity_curve=empty_equity,
+                trades=empty_trades,
+                total_return=0.0,
+                sharpe_ratio=0.0,
+                max_drawdown=0.0,
+                win_rate=0.0,
+                profit_factor=0.0,
+                num_trades=0
+            )
     
     # Execute in parallel
     with ThreadPoolExecutor(max_workers=max_workers) as executor:

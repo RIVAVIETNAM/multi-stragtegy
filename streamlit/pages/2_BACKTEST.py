@@ -122,18 +122,31 @@ if st.button("🚀 RUN BACKTEST", type="primary", use_container_width=True):
         # Get configured params from session state, or use defaults
         params = st.session_state.get(f'params_{name}', STRATEGIES[name]['params'])
         
-        # Wrap function to pass params (use default parameter to capture in closure)
-        def make_strategy_wrapper(func, strategy_params):
-            def wrapper(data, params=strategy_params):
-                return func(data, **params)
+        # Wrap function to pass params (use lambda with default parameter to avoid closure issue)
+        def create_wrapper(func, strategy_params):
+            def wrapper(data):
+                return func(data, **strategy_params)
             return wrapper
         
-        strategies_to_run[name] = make_strategy_wrapper(strategy_func, params)
+        strategies_to_run[name] = create_wrapper(strategy_func, params)
     
     # Execute
     with st.spinner("⏳ Running parallel backtests..."):
+        # Debug: Check data and strategies
+        data = st.session_state.market_data
+        if data is None or len(data) == 0:
+            st.error("❌ No market data available!")
+            st.stop()
+        
+        # Ensure data has required columns
+        required_cols = ['close', 'high', 'low']
+        missing_cols = [col for col in required_cols if col not in data.columns]
+        if missing_cols:
+            st.error(f"❌ Missing required columns: {missing_cols}")
+            st.stop()
+        
         results = run_parallel_backtests(
-            data=st.session_state.market_data,
+            data=data,
             strategies=strategies_to_run,
             initial_capital=st.session_state.get('initial_capital', 100_000_000),
             transaction_cost=st.session_state.get('transaction_cost', 0.0015),
