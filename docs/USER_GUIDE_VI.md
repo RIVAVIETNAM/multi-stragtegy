@@ -1,6 +1,5 @@
-# 📖 HƯỚNG DẪN SỬ DỤNG VN10 PLATFORM
-
-## Nền tảng Backtesting Đa Chiến Lược
+# 📖 HƯỚNG DẪN SỬ DỤNG
+## Nền tảng Backtesting Đa Chiến Lược - Multi-Strategy Backtesting Platform
 
 ---
 
@@ -19,7 +18,7 @@ streamlit run app/main.py
 
 ## 📱 GIAO DIỆN CHÍNH
 
-VN10 có **4 trang chính**, navigate bằng sidebar bên trái:
+Platform có **4 trang chính**, navigate bằng sidebar bên trái:
 
 1. **⚙️ Configure** - Cấu hình chiến lược
 2. **🚀 Backtest** - Chạy kiểm thử
@@ -487,4 +486,4 @@ streamlit run app/main.py --server.port 8502
 
 **Chúc bạn backtesting thành công! 🇻🇳📈**
 
-*VN10 Platform v1.0 - Built for Vietnamese Stock Market*
+*Multi-Strategy Backtesting Platform v1.0 - Built for Vietnamese Stock Market*

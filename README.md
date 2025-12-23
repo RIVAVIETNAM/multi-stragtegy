@@ -1,4 +1,4 @@
-# VN10: Multi-Strategy Backtesting Platform
+# Multi-Strategy Backtesting Platform
 ## For Vietnamese Stock Market
 
 [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
@@ -12,7 +12,7 @@ A specialized backtesting platform designed for the **Vietnamese stock market** 
 
 ### Key Innovation
 
-Instead of testing strategies one-by-one, VN10 runs them **in parallel** with:
+Instead of testing strategies one-by-one, this platform runs them **in parallel** with:
 - ✅ Same market data
 - ✅ Same execution rules  
 - ✅ Same cost assumptions
@@ -103,7 +103,7 @@ print(create_leaderboard(results))
 
 ## 📐 Architecture
 
-VN10 uses a **4-layer architecture**:
+The platform uses a **4-layer architecture**:
 
 1. **Data Layer** → Fetches & caches VN market data
 2. **Strategy Layer** → Defines trading rules via Python SDK
@@ -116,7 +116,7 @@ See `docs/` for detailed documentation.
 
 ## 🎯 Research Questions 
 
-Based on our academic research, VN10 addresses:
+Based on our academic research, the platform addresses:
 
 - **RQ1:** Multi-strategy portfolio achieves **higher Sharpe** than individual strategies
 - **RQ2:** VN market rules enforcement produces **realistic results**

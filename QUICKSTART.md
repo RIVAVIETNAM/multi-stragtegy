@@ -1,4 +1,4 @@
-# VN10 Multi-Strategy Backtesting Platform
+# Multi-Strategy Backtesting Platform
 
 Dự án đã sẵn sàng sử dụng!
 
