@@ -86,7 +86,7 @@ if 'market_data' in st.session_state:
         st.metric("End Date", data.index[-1].strftime('%Y-%m-%d'))
     
     with st.expander("View Data"):
-        st.dataframe(data.tail(20), use_container_width=True)
+        st.dataframe(data.tail(20), width='stretch')
 
 st.markdown("---")
 
@@ -111,7 +111,7 @@ with st.expander("📋 Execution Plan"):
     st.markdown(f"**VN Rules:** {'Enabled' if st.session_state.get('enforce_vn_rules', True) else 'Disabled'}")
 
 # Run button
-if st.button("🚀 RUN BACKTEST", type="primary", use_container_width=True):
+if st.button("🚀 RUN BACKTEST", type="primary"):
     
     # Prepare strategies with configured params
     selected = st.session_state.selected_strategies
@@ -168,7 +168,7 @@ if st.button("🚀 RUN BACKTEST", type="primary", use_container_width=True):
     
     st.dataframe(
         leaderboard.style.background_gradient(cmap='RdYlGn', subset=['Total Return (%)', 'Sharpe Ratio']),
-        use_container_width=True
+        width='stretch'
     )
     
     st.info("👉 Go to **Results** page for detailed analysis!")

@@ -105,10 +105,10 @@ strategy_name = st.text_input(
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    generate_button = st.button("🚀 Generate Strategy", type="primary", use_container_width=True)
+    generate_button = st.button("🚀 Generate Strategy", type="primary")
 
 with col2:
-    if st.button("📋 Load Example", use_container_width=True):
+    if st.button("📋 Load Example"):
         strategy_description = "Buy when RSI is below 30 and sell when RSI is above 70. Use period 14 for RSI calculation."
         strategy_name = "rsi_mean_reversion"
         st.rerun()

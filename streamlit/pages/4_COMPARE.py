@@ -38,7 +38,7 @@ results = st.session_state.backtest_results
 st.subheader("📊 Summary Statistics")
 
 summary = create_summary_stats(results)
-st.dataframe(summary, use_container_width=True)
+st.dataframe(summary, width='stretch')
 
 st.markdown("---")
 
@@ -56,7 +56,7 @@ st.dataframe(
         cmap='RdYlGn_r',
         subset=['Max Drawdown (%)']
     ),
-    use_container_width=True
+    width='stretch'
 )
 
 st.caption("📌 Sorted by Sharpe Ratio (risk-adjusted returns)")
@@ -102,7 +102,7 @@ if len(results) > 1:
     with tab1:
         try:
             fig_matrix = create_strategy_matrix(results)
-            st.plotly_chart(fig_matrix, use_container_width=True)
+            st.plotly_chart(fig_matrix, width='stretch')
             st.caption("""
             **Quadrant Guide:**
             - 🟢 **Leading:** High RS, Positive Momentum (Best performers)
@@ -114,11 +114,11 @@ if len(results) > 1:
             st.warning(f"Could not create matrix: {str(e)}")
             st.info("Falling back to simple comparison...")
             fig_matrix = create_strategy_matrix(results)
-            st.plotly_chart(fig_matrix, use_container_width=True)
+            st.plotly_chart(fig_matrix, width='stretch')
     
     with tab2:
         fig_radar = plot_metrics_comparison(results)
-        st.plotly_chart(fig_radar, use_container_width=True)
+        st.plotly_chart(fig_radar, width='stretch')
         st.caption("Normalized radar chart showing relative performance across key metrics")
 
 st.markdown("---")

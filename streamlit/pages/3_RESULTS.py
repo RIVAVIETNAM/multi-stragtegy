@@ -32,7 +32,7 @@ st.markdown("---")
 st.subheader("💹 Multi-Strategy Performance")
 
 fig_equity = plot_equity_curves(results)
-st.plotly_chart(fig_equity, use_container_width=True)
+st.plotly_chart(fig_equity, width='stretch')
 
 st.caption("📊 All strategies executed in parallel with identical market data and costs")
 
@@ -96,16 +96,16 @@ if strategy_name:
     tab1, tab2, tab3 = st.tabs(["📉 Drawdown", "📊 Returns Distribution", "📋 Trade Log"])
     
     with tab1:
-        st.plotly_chart(plot_drawdown(result), use_container_width=True)
+        st.plotly_chart(plot_drawdown(result), width='stretch')
         st.caption("Drawdown shows peak-to-trough decline in portfolio value")
     
     with tab2:
-        st.plotly_chart(plot_returns_distribution(result), use_container_width=True)
+        st.plotly_chart(plot_returns_distribution(result), width='stretch')
         st.caption("Distribution of daily returns")
     
     with tab3:
         if len(result.trades) > 0:
-            st.dataframe(result.trades, use_container_width=True)
+            st.dataframe(result.trades, width='stretch')
         else:
             st.info("No trades executed")
 
