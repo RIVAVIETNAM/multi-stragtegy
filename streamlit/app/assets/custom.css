@@ -4,7 +4,7 @@
    Inspired by FC-Terminal design concepts
    ============================================ */
 
-/* Root Variables */
+/* Root Variables - Light Theme */
 :root {
     --primary-color: #1f77b4;
     --secondary-color: #ff7f0e;
@@ -12,16 +12,16 @@
     --danger-color: #d62728;
     --warning-color: #ffbb33;
     --info-color: #17a2b8;
-    --dark-bg: #0e1117;
-    --card-bg: #262730;
-    --text-primary: #ffffff;
-    --text-secondary: #b0b0b0;
-    --border-color: #3a3a4a;
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --dark-bg: #ffffff;
+    --card-bg: #f8f9fa;
+    --text-primary: #262730;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --gradient-primary: linear-gradient(135deg, #1f77b4 0%, #2c8fd4 100%);
+    --gradient-success: linear-gradient(135deg, #2ca02c 0%, #4fd84f 100%);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.05);
     --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,0.2);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* Main Container */
@@ -53,6 +53,15 @@ h2 {
 h3 {
     color: var(--text-primary);
     font-weight: 600;
+}
+
+/* Main background */
+.main {
+    background-color: #ffffff;
+}
+
+.stApp {
+    background-color: #ffffff;
 }
 
 /* Cards & Metrics */
@@ -105,11 +114,11 @@ h3 {
     border-color: var(--info-color);
 }
 
-/* Expanders */
+/* Expanders - Light theme */
 .streamlit-expanderHeader {
     font-weight: 600;
     color: var(--text-primary);
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(31, 119, 180, 0.1);
     border-radius: 8px;
     padding: 0.75rem 1rem;
     margin-bottom: 0.5rem;
@@ -117,18 +126,34 @@ h3 {
 
 .streamlit-expanderContent {
     padding: 1rem;
-    background: rgba(38, 39, 48, 0.5);
+    background: #f8f9fa;
     border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
-/* Sidebar */
+/* Sidebar - Light theme */
 [data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
-    border-right: 1px solid var(--border-color);
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    border-right: 1px solid #dee2e6;
 }
 
 [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
-    color: var(--text-primary);
+    color: #262730;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
+    color: #262730;
+}
+
+/* Sidebar navigation links */
+[data-testid="stSidebar"] a {
+    color: #495057;
+}
+
+[data-testid="stSidebar"] a:hover {
+    color: #1f77b4;
 }
 
 /* Dataframes */
@@ -138,11 +163,12 @@ h3 {
     box-shadow: var(--shadow-md);
 }
 
-/* Tabs */
+/* Tabs - Light theme */
 [data-baseweb="tab-list"] {
-    background: rgba(38, 39, 48, 0.5);
+    background: #f8f9fa;
     border-radius: 8px;
     padding: 0.5rem;
+    border: 1px solid var(--border-color);
 }
 
 [data-baseweb="tab"] {
@@ -164,9 +190,9 @@ h3 {
     padding: 1rem;
 }
 
-/* Custom Cards */
+/* Custom Cards - Light theme */
 .strategy-card {
-    background: rgba(38, 39, 48, 0.6);
+    background: #f8f9fa;
     border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
@@ -223,9 +249,9 @@ h3 {
     color: var(--primary-color);
 }
 
-/* Metric Cards */
+/* Metric Cards - Light theme */
 .metric-card {
-    background: rgba(38, 39, 48, 0.6);
+    background: #f8f9fa;
     border-radius: 10px;
     padding: 1.5rem;
     text-align: center;
@@ -255,14 +281,14 @@ h3 {
     letter-spacing: 1px;
 }
 
-/* Scrollbar Styling */
+/* Scrollbar Styling - Light theme */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(38, 39, 48, 0.5);
+    background: #f0f2f6;
     border-radius: 5px;
 }
 
@@ -304,9 +330,9 @@ h3 {
     padding: 1rem;
 }
 
-/* Code Blocks */
+/* Code Blocks - Light theme */
 .stCodeBlock {
-    background: rgba(14, 17, 23, 0.8);
+    background: #f8f9fa;
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
@@ -317,16 +343,16 @@ h3 {
     font-weight: 500;
 }
 
-/* Selectbox */
+/* Selectbox - Light theme */
 [data-baseweb="select"] {
-    background: rgba(38, 39, 48, 0.6);
+    background: #ffffff;
     border-color: var(--border-color);
     border-radius: 8px;
 }
 
-/* Input Fields */
+/* Input Fields - Light theme */
 .stTextInput > div > div > input {
-    background: rgba(38, 39, 48, 0.6);
+    background: #ffffff;
     border-color: var(--border-color);
     border-radius: 8px;
     color: var(--text-primary);
