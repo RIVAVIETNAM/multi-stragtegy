@@ -159,6 +159,30 @@ if st.button("🚀 RUN BACKTEST", type="primary"):
                 import traceback
                 st.code(traceback.format_exc())
         
+        # Test one strategy first to debug
+        test_name = list(strategies_to_run.keys())[0]
+        test_func = strategies_to_run[test_name]
+        
+        with st.expander("🔍 Debug Info (Click to expand)"):
+            try:
+                test_signals = test_func(data)
+                st.write(f"**Testing {test_name}:**")
+                st.write(f"- Data shape: {data.shape}")
+                st.write(f"- Data columns: {data.columns.tolist()}")
+                st.write(f"- Data index type: {type(data.index)}")
+                st.write(f"- Signals shape: {test_signals.shape if test_signals is not None else 'None'}")
+                if test_signals is not None:
+                    st.write(f"- Signals type: {type(test_signals)}")
+                    st.write(f"- Signals value counts: {test_signals.value_counts().to_dict()}")
+                    st.write(f"- Buy signals (1): {(test_signals == 1).sum()}")
+                    st.write(f"- Sell signals (-1): {(test_signals == -1).sum()}")
+                    st.write(f"- Hold signals (0): {(test_signals == 0).sum()}")
+                    st.write(f"- Signals index matches data: {test_signals.index.equals(data.index)}")
+            except Exception as e:
+                st.error(f"Error testing strategy: {str(e)}")
+                import traceback
+                st.code(traceback.format_exc())
+        
         results = run_parallel_backtests(
             data=data,
             strategies=strategies_to_run,
@@ -166,6 +190,15 @@ if st.button("🚀 RUN BACKTEST", type="primary"):
             transaction_cost=st.session_state.get('transaction_cost', 0.0015),
             enforce_vn_rules=st.session_state.get('enforce_vn_rules', True)
         )
+        
+        # Debug: Show results summary
+        with st.expander("📊 Results Summary (Click to expand)"):
+            for name, result in results.items():
+                st.write(f"**{name}:**")
+                st.write(f"- Total Return: {result.total_return:.2f}%")
+                st.write(f"- Num Trades: {result.num_trades}")
+                st.write(f"- Final Equity: {result.equity_curve.iloc[-1]:,.0f} VND")
+                st.write(f"- Sharpe: {result.sharpe_ratio:.2f}")
         
         # Store results
         st.session_state.backtest_results = results
