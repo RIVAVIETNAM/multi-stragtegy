@@ -201,20 +201,34 @@ def run_parallel_backtests(data: pd.DataFrame,
             if not isinstance(signals, pd.Series):
                 raise ValueError(f"Strategy {name} must return pd.Series, got {type(signals)}")
             
+            # Debug: Check signals
+            print(f"Strategy {name}:")
+            print(f"  - Signals shape: {signals.shape}")
+            print(f"  - Signals value counts: {signals.value_counts().to_dict()}")
+            print(f"  - Buy signals: {(signals == 1).sum()}")
+            print(f"  - Sell signals: {(signals == -1).sum()}")
+            print(f"  - Hold signals: {(signals == 0).sum()}")
+            
             # Check if signals match data index
             if not signals.index.equals(data.index):
-                # Try to align signals with data index
+                print(f"  - Warning: Signals index doesn't match data index, reindexing...")
                 signals = signals.reindex(data.index, fill_value=0)
             
             result = run_backtest(
                 data, signals, name, 
                 initial_capital, transaction_cost, enforce_vn_rules
             )
+            
+            # Debug: Check result
+            print(f"  - Total return: {result.total_return:.2f}%")
+            print(f"  - Num trades: {result.num_trades}")
+            print(f"  - Final equity: {result.equity_curve.iloc[-1]:,.0f}")
+            
             return name, result
         except Exception as e:
             # Return empty result on error
             import traceback
-            print(f"Error in strategy {name}: {e}")
+            print(f"ERROR in strategy {name}: {e}")
             print(traceback.format_exc())
             # Return a result with zeros
             empty_equity = pd.Series([initial_capital] * len(data), index=data.index)

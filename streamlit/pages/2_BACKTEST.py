@@ -122,13 +122,9 @@ if st.button("🚀 RUN BACKTEST", type="primary"):
         # Get configured params from session state, or use defaults
         params = st.session_state.get(f'params_{name}', STRATEGIES[name]['params'])
         
-        # Wrap function to pass params (use lambda with default parameter to avoid closure issue)
-        def create_wrapper(func, strategy_params):
-            def wrapper(data):
-                return func(data, **strategy_params)
-            return wrapper
-        
-        strategies_to_run[name] = create_wrapper(strategy_func, params)
+        # Wrap function to pass params (use functools.partial to avoid closure issue)
+        from functools import partial
+        strategies_to_run[name] = partial(strategy_func, **params)
     
     # Execute
     with st.spinner("⏳ Running parallel backtests..."):
@@ -144,6 +140,24 @@ if st.button("🚀 RUN BACKTEST", type="primary"):
         if missing_cols:
             st.error(f"❌ Missing required columns: {missing_cols}")
             st.stop()
+        
+        # Debug: Test one strategy first
+        if st.session_state.get('debug_mode', False):
+            test_name = list(strategies_to_run.keys())[0]
+            test_func = strategies_to_run[test_name]
+            try:
+                test_signals = test_func(data)
+                st.write(f"**Debug - {test_name}:**")
+                st.write(f"- Signals shape: {test_signals.shape}")
+                st.write(f"- Signals value counts: {test_signals.value_counts().to_dict()}")
+                st.write(f"- Has buy signals: {(test_signals == 1).any()}")
+                st.write(f"- Has sell signals: {(test_signals == -1).any()}")
+                st.write(f"- Data shape: {data.shape}")
+                st.write(f"- Data columns: {data.columns.tolist()}")
+            except Exception as e:
+                st.error(f"Error testing strategy: {e}")
+                import traceback
+                st.code(traceback.format_exc())
         
         results = run_parallel_backtests(
             data=data,
