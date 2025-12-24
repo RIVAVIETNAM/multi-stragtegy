@@ -177,7 +177,7 @@ streamlit run streamlit/MAIN.py
    - MACD: Fast (12), Slow (26), Signal (9)
    - RSI: Period (14), Oversold (30), Overbought (70)
    - Bollinger: Window (20), Num Std (2.0)
-   - SMA: Short Window (50), Long Window (200)
+   - SMA: Short Window (10), Long Window (30) ⚠️ *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
 
 ### Phần 2: Backtest Parameters
 
@@ -327,13 +327,19 @@ VN Rules: Enabled
 
 🎯 Quick Results
 ┌────────────┬────────┬────────┬─────┐
-│ Strategy   │ Return │ Sharpe │ DD  │
+│ Strategy   │ Return │ Sharpe │ Trades│
 ├────────────┼────────┼────────┼─────┤
-│ MACD       │ 25.3%  │ 1.2    │-12% │
-│ RSI        │ 18.5%  │ 0.9    │-15% │
-│ Bollinger  │ 22.1%  │ 1.1    │-10% │
-│ SMA        │ 20.8%  │ 1.0    │-14% │
+│ MACD       │ 22.8%  │ 0.56   │  38  │
+│ RSI        │ 44.8%  │ 0.98   │  11  │
+│ Bollinger  │ 46.8%  │ 1.52   │  10  │
+│ SMA        │ ~15%   │ ~0.8   │ ~18  │
 └────────────┴────────┴────────┴─────┘
+
+*Note: Results vary based on data. Sample data (500 days) typically shows:
+- MACD: ~38 trades, moderate returns
+- RSI: ~11 trades, good returns  
+- Bollinger: ~10 trades, best returns
+- SMA: ~18 trades (with 10/30 windows)*
 ```
 
 ### ✅ Khi hoàn tất:
@@ -685,6 +691,28 @@ Chiến lược tốt = Return cao + Sharpe > 1 + Drawdown thấp
 streamlit run streamlit/MAIN.py --server.port 8502
 ```
 
+### Lỗi 6: Backtest ra toàn 0 (0 trades, 0% return)
+**Nguyên nhân:** 
+- Streamlit Cloud chưa deploy code mới (sau fix 2024-12-24)
+- Hoặc data không có signals phù hợp
+
+**Giải pháp:**
+1. **Reload Streamlit Cloud app:**
+   - Vào https://share.streamlit.io/
+   - Tìm app → Click menu (⋮) → "Reboot app"
+   - Đợi 1-2 phút
+   
+2. **Kiểm tra signals:**
+   - Mở "🔍 Debug Info" trong BACKTEST page
+   - Xem "Buy signals" và "Sell signals"
+   - Nếu cả 2 = 0 → Strategy không phù hợp với data
+   
+3. **Thử strategy khác:**
+   - Bollinger Bands thường hoạt động tốt với sample data
+   - SMA Crossover: Đảm bảo windows phù hợp (10/30 cho 500 points)
+
+**Lưu ý:** Fix đã được áp dụng từ 2024-12-24. Nếu vẫn ra 0, cần reload app.
+
 ---
 
 ## ❓ FAQ
@@ -703,6 +731,12 @@ A: > 1.0 = Tốt, > 2.0 = Rất tốt, < 0 = Kém
 
 **Q: Có thể tùy chỉnh strategies không?**
 A: Có! Mở expander trong CONFIGURE để điều chỉnh tham số.
+
+**Q: Tại sao SMA Crossover default là 10/30 thay vì 50/200?**
+A: 50/200 quá dài cho sample data (500 points), không tạo crossovers. 10/30 phù hợp hơn và tạo ~18 signals. Với real data dài hơn, bạn có thể đổi lại 50/200 trong CONFIGURE.
+
+**Q: Tại sao backtest trước đó ra 0 trades?**
+A: Đã fix bug trong backtest engine (2024-12-24). Nếu vẫn ra 0, reload Streamlit Cloud app (xem Lỗi 6 ở trên).
 
 ---
 
