@@ -42,10 +42,10 @@ Platform có **4 trang chính**, navigate bằng sidebar bên trái:
    - ✅ **SMA Crossover** (Xu hướng)
 2. Mở rộng mỗi chiến lược để **tùy chỉnh tham số**:
 
-   - MACD: Fast, Slow, Signal
-   - RSI: Period, Oversold, Overbought
-   - Bollinger: Window, Num Std
-   - SMA: Short Window, Long Window
+   - MACD: Fast (12), Slow (26), Signal (9)
+   - RSI: Period (14), Oversold (30), Overbought (70)
+   - Bollinger: Window (20), Num Std (2.0)
+   - SMA: Short Window (10), Long Window (30) *Mặc định: 10/30 (đã đổi từ 50/200 để phù hợp với sample data)*
 
 ### Cài đặt Backtest
 

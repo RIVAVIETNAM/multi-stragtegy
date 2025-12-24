@@ -40,7 +40,7 @@ Instead of testing strategies one-by-one, this platform runs them **in parallel*
 - MACD Crossover (12, 26, 9)
 - RSI Mean-Reversion (Period 14)
 - Bollinger Bands (20, σ=2)
-- SMA Crossover (50/200)
+- SMA Crossover (10/30) *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
 
 ### 📈 Advanced Analytics
 - Sharpe ratio, Max drawdown, Win rate

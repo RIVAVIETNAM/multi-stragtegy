@@ -87,7 +87,7 @@ Custom CSS đã được tự động load khi chạy ứng dụng. Không cần
 **Tốt:**
 - ✅ "Buy when MACD line crosses above signal line. Use fast period 12, slow period 26, signal period 9."
 - ✅ "Buy at lower Bollinger Band (2 standard deviations) and sell at upper band. Use window 20."
-- ✅ "Buy when price crosses above 50-day SMA and sell when price crosses below 200-day SMA."
+- ✅ "Buy when price crosses above 10-day SMA and sell when price crosses below 30-day SMA." *Note: Default SMA windows are 10/30 (changed from 50/200 for better sample data compatibility)*
 
 **Không tốt:**
 - ❌ "Make money" (quá mơ hồ)
