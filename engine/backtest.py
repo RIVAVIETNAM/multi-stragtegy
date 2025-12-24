@@ -83,24 +83,32 @@ def run_backtest(data: pd.DataFrame,
         # Buy signal
         if signal == 1:
             if shares == 0:
-                # Calculate shares to buy (use all cash)
-                shares_to_buy = int(cash / price)
-                if shares_to_buy > 0:
-                    cost = shares_to_buy * price
+                # Calculate shares to buy (account for transaction cost)
+                # We need: shares * price + fee <= cash
+                # fee = (shares * price) * transaction_cost
+                # So: shares * price * (1 + transaction_cost) <= cash
+                # shares <= cash / (price * (1 + transaction_cost))
+                max_shares = int(cash / (price * (1 + transaction_cost + 0.001)))  # +0.001 for tax
+                
+                if max_shares > 0:
+                    cost = max_shares * price
                     fee = calculate_vn_transaction_cost(cost, transaction_cost)
+                    total_cost = cost + fee
                     
-                    if cash >= (cost + fee):
-                        shares = shares_to_buy
-                        cash -= (cost + fee)
+                    if cash >= total_cost:
+                        shares = max_shares
+                        cash -= total_cost
                         
                         trades_list.append({
                             'date': data.index[i],
                             'type': 'BUY',
                             'price': price,
                             'shares': shares,
-                            'cost': cost + fee
+                            'cost': total_cost
                         })
-                        print(f"  - BUY at {data.index[i]}: {shares} shares @ {price:.2f}, cost: {cost+fee:.2f}, cash left: {cash:.2f}")
+                        print(f"  - BUY at {data.index[i]}: {shares} shares @ {price:.2f}, cost: {total_cost:.2f}, cash left: {cash:.2f}")
+                    else:
+                        print(f"  - BUY SKIPPED at {data.index[i]}: not enough cash (need {total_cost:.2f}, have {cash:.2f})")
             else:
                 # Already have shares, ignore buy signal
                 pass
