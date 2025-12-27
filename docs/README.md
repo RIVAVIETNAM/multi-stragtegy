@@ -10,6 +10,7 @@ Hướng dẫn sử dụng platform:
 - **[Installation Guide](INSTALLATION.md)** - Hướng dẫn cài đặt và setup
 - **[Streamlit Platform Guide](guides/STREAMLIT_GUIDE.md)** - Hướng dẫn chi tiết sử dụng Streamlit app
 - **[Deployment Guide](guides/DEPLOYMENT.md)** - Hướng dẫn deploy lên cloud
+- **[Test Case Setup Guide](guides/TEST_CASE_SETUP.md)** - Hướng dẫn tạo kết quả test case
 - **[User Guide (Vietnamese)](USER_GUIDE_VI.md)** - Hướng dẫn bằng tiếng Việt
 
 ### ✨ Features (`features/`)

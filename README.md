@@ -37,10 +37,12 @@ Instead of testing strategies one-by-one, this platform runs them **in parallel*
 - Multi-threaded for speed
 
 ### 📊 Built-in Strategies
-- MACD Crossover (12, 26, 9)
-- RSI Mean-Reversion (Period 14)
-- Bollinger Bands (20, σ=2)
-- SMA Crossover (10/30) *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
+- MACD Crossover (12, 26, 9) - Momentum strategy
+- RSI Mean-Reversion (Period 14) - Mean-reversion strategy
+- Bollinger Bands (20, σ=2) - Volatility strategy
+- SMA Crossover (10/30) - Trend strategy *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
+- **Buy & Hold** - Benchmark strategy (buy at start, hold until end)
+- **Combined Portfolio** - Equal-weight combination of multiple strategies
 
 ### 📈 Advanced Analytics
 - Sharpe ratio, Max drawdown, Win rate
@@ -196,6 +198,7 @@ Based on our academic research, the platform addresses:
 - [User Guide (Vietnamese)](docs/USER_GUIDE_VI.md)
 - [Streamlit Platform Guide](docs/guides/STREAMLIT_GUIDE.md)
 - [Deployment Guide](docs/guides/DEPLOYMENT.md)
+- [Test Case Setup Guide](docs/guides/TEST_CASE_SETUP.md) - How to replicate test case results
 
 ### ✨ Features
 - [New Features Guide](docs/features/FEATURES_GUIDE.md)
