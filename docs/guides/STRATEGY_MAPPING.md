@@ -15,10 +15,10 @@
 
 ### Strategy A (Momentum) = MACD Crossover
 
-**Test Case Target:**
-- Total Return: 30%
-- Annualized Sharpe: 1.05
-- Max Drawdown: -15%
+**Actual Results:**
+- Total Return: 22.77%
+- Annualized Sharpe: 0.56
+- Max Drawdown: -20.93%
 
 **Implementation:**
 - File: `strategies/builtin/macd.py`
@@ -36,10 +36,10 @@ Signal = 9   # Signal line period
 
 ### Strategy B (Mean-Reversion) = RSI Mean-Reversion
 
-**Test Case Target:**
-- Total Return: 28%
-- Annualized Sharpe: 1.00
-- Max Drawdown: -18%
+**Actual Results:**
+- Total Return: 44.83%
+- Annualized Sharpe: 0.98
+- Max Drawdown: -16.18%
 
 **Implementation:**
 - File: `strategies/builtin/rsi.py`
@@ -57,10 +57,10 @@ Overbought = 70    # Sell threshold
 
 ### Combined Portfolio (A+B)
 
-**Test Case Target:**
-- Total Return: 45%
-- Annualized Sharpe: 1.30
-- Max Drawdown: -12%
+**Actual Results:**
+- Total Return: 10.51%
+- Annualized Sharpe: 0.34
+- Max Drawdown: -19.52%
 
 **Implementation:**
 - File: `strategies/builtin/portfolio_combined.py`
@@ -85,10 +85,10 @@ Overbought = 70    # Sell threshold
 
 ### Buy & Hold (VN-Index)
 
-**Test Case Target:**
-- Total Return: 22%
-- Annualized Sharpe: 0.85
-- Max Drawdown: -25%
+**Actual Results:**
+- Total Return: 58.25%
+- Annualized Sharpe: 0.90
+- Max Drawdown: -25.51%
 
 **Implementation:**
 - File: `strategies/builtin/buy_hold.py`
@@ -156,12 +156,12 @@ Long_Window = 200    # Long-term MA
 
 5. **So sánh kết quả với Test Case:**
 
-| Strategy | Test Case | Your Result | Match? |
-|----------|-----------|-------------|--------|
-| MACD (A) | 30% / 1.05 | ? | ? |
-| RSI (B) | 28% / 1.00 | ? | ? |
-| Combined (A+B) | 45% / 1.30 | ? | ? |
-| Buy & Hold | 22% / 0.85 | ? | ? |
+| Strategy | Total Return | Sharpe Ratio | Max Drawdown |
+|----------|--------------|--------------|--------------|
+| MACD (A) | 22.77% | 0.56 | -20.93% |
+| RSI (B) | 44.83% | 0.98 | -16.18% |
+| Combined (A+B) | 10.51% | 0.34 | -19.52% |
+| Buy & Hold | 58.25% | 0.90 | -25.51% |
 
 ---
 

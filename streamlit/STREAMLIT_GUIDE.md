@@ -177,7 +177,7 @@ streamlit run streamlit/MAIN.py
    - MACD: Fast (12), Slow (26), Signal (9)
    - RSI: Period (14), Oversold (30), Overbought (70)
    - Bollinger: Window (20), Num Std (2.0)
-   - SMA: Short Window (10), Long Window (30) ⚠️ *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
+   - SMA: Short Window (50), Long Window (200) - Golden/Death Cross strategy
 
 ### Phần 2: Backtest Parameters
 
@@ -732,8 +732,8 @@ A: > 1.0 = Tốt, > 2.0 = Rất tốt, < 0 = Kém
 **Q: Có thể tùy chỉnh strategies không?**
 A: Có! Mở expander trong CONFIGURE để điều chỉnh tham số.
 
-**Q: Tại sao SMA Crossover default là 10/30 thay vì 50/200?**
-A: 50/200 quá dài cho sample data (500 points), không tạo crossovers. 10/30 phù hợp hơn và tạo ~18 signals. Với real data dài hơn, bạn có thể đổi lại 50/200 trong CONFIGURE.
+**Q: Tại sao SMA Crossover default là 50/200?**
+A: 50/200 là tham số chuẩn cho Golden/Death Cross strategy, phù hợp với trend-following. Với sample data ngắn (500 points), có thể không tạo nhiều signals. Với real data dài hơn (nhiều năm), 50/200 sẽ hoạt động tốt hơn.
 
 **Q: Tại sao backtest trước đó ra 0 trades?**
 A: Đã fix bug trong backtest engine (2024-12-24). Nếu vẫn ra 0, reload Streamlit Cloud app (xem Lỗi 6 ở trên).

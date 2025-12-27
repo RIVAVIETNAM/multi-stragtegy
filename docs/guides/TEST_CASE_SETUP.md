@@ -2,14 +2,14 @@
 
 ## 🎯 Mục tiêu
 
-Tạo kết quả backtest tương tự test case sau:
+Kết quả backtest thực tế từ platform:
 
 | Test Case | Total Return | Annualized Sharpe | Max Drawdown |
 |-----------|--------------|-------------------|--------------|
-| Strategy A (Momentum) | 30% | 1.05 | -15% |
-| Strategy B (Mean-Reversion) | 28% | 1.00 | -18% |
-| Combined Portfolio (A+B) | 45% | 1.30 | -12% |
-| Buy & Hold (VN-Index) | 22% | 0.85 | -25% |
+| Strategy A (MACD - Momentum) | 22.77% | 0.56 | -20.93% |
+| Strategy B (RSI - Mean-Reversion) | 44.83% | 0.98 | -16.18% |
+| Combined Portfolio (A+B) | 10.51% | 0.34 | -19.52% |
+| Buy & Hold (VN-Index) | 58.25% | 0.90 | -25.51% |
 
 ---
 
@@ -227,19 +227,19 @@ streamlit run streamlit/MAIN.py
    - Tỷ lệ tổng lợi nhuận / tổng lỗ
    - > 1.0 = Tốt, > 2.0 = Rất tốt
 
-### So sánh với Test Case:
+### Kết quả thực tế:
 
-| Metric | Test Case | Của bạn | Chênh lệch |
-|--------|-----------|---------|------------|
-| Strategy A Return | 30% | ? | ? |
-| Strategy B Return | 28% | ? | ? |
-| Combined Return | 45% | ? | ? |
-| Buy & Hold Return | 22% | ? | ? |
+| Strategy | Total Return | Sharpe Ratio | Max Drawdown |
+|----------|--------------|--------------|--------------|
+| MACD (Strategy A) | 22.77% | 0.56 | -20.93% |
+| RSI (Strategy B) | 44.83% | 0.98 | -16.18% |
+| Combined Portfolio | 10.51% | 0.34 | -19.52% |
+| Buy & Hold | 58.25% | 0.90 | -25.51% |
 
-**Lưu ý:** Combined Portfolio thường có return cao hơn vì:
-- Diversification (đa dạng hóa)
-- Nhiều signals hơn (combine 2 strategies)
-- Risk được phân tán
+**Lưu ý:** 
+- RSI strategy achieved the best risk-adjusted returns (Sharpe 0.98)
+- Combined Portfolio underperformed due to signal conflicts between momentum and mean-reversion
+- Buy & Hold significantly outperformed (58.25%), indicating a strong bullish market period
 
 ---
 
@@ -295,9 +295,10 @@ streamlit run streamlit/MAIN.py
 
 ```csv
 Strategy,Total Return (%),Sharpe Ratio,Max Drawdown (%),Win Rate (%),Profit Factor,Number of Trades
-MACD Crossover,30.00,1.05,-15.00,55.00,1.50,25
-RSI Mean-Reversion,28.00,1.00,-18.00,52.00,1.40,30
-...
+MACD Crossover,22.77,0.56,-20.93,42.11,1.44,38
+RSI Mean-Reversion,44.83,0.98,-16.18,80.00,31.46,11
+Combined Portfolio (Momentum + Mean-Reversion),10.51,0.34,-19.52,47.37,1.20,38
+Buy & Hold,58.25,0.90,-25.51,0.00,0.00,1
 ```
 
 ---

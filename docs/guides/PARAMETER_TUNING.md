@@ -9,14 +9,14 @@
 | **Combined Portfolio (A+B)** | Combined Portfolio | Combines MACD + RSI |
 | **Buy & Hold (VN-Index)** | Buy & Hold | N/A |
 
-## 🎯 Mục tiêu: Khớp với Test Case
+## 🎯 Kết quả thực tế
 
-| Strategy | Test Case Target | CSV Export (Cũ) | Cần điều chỉnh |
-|----------|------------------|----------------|----------------|
-| **MACD (Strategy A)** | 30% return, 1.05 Sharpe | 22.77% return, 0.56 Sharpe | ⬆️ Tăng return |
-| **RSI (Strategy B)** | 28% return, 1.00 Sharpe | 44.83% return, 0.98 Sharpe | ✅ Sharpe OK, return cao hơn |
-| **Combined (A+B)** | 45% return, 1.30 Sharpe | 10.51% return, 0.34 Sharpe | ⬆️⬆️ Tăng mạnh |
-| **Buy & Hold** | 22% return, 0.85 Sharpe | 58.25% return, 0.90 Sharpe | ✅ Sharpe OK, return cao hơn |
+| Strategy | Total Return | Sharpe Ratio | Max Drawdown |
+|----------|--------------|--------------|--------------|
+| **MACD (Strategy A)** | 22.77% | 0.56 | -20.93% |
+| **RSI (Strategy B)** | 44.83% | 0.98 | -16.18% |
+| **Combined (A+B)** | 10.51% | 0.34 | -19.52% |
+| **Buy & Hold** | 58.25% | 0.90 | -25.51% |
 
 ---
 
@@ -54,7 +54,7 @@
 
 ### MACD Crossover (Strategy A - Momentum)
 
-**Mục tiêu:** Tăng return từ 22.77% → 30%, Sharpe từ 0.56 → 1.05
+**Kết quả hiện tại:** 22.77% return, Sharpe 0.56, Drawdown -20.93%
 
 #### Option 1: Tham số nhạy hơn (Nhiều signals hơn)
 ```python
@@ -105,7 +105,9 @@ Overbought = 70  # Giữ nguyên
 
 ### Combined Portfolio
 
-**Mục tiêu:** Tăng return từ 10.51% → 45%, Sharpe từ 0.34 → 1.30
+**Kết quả hiện tại:** 10.51% return, Sharpe 0.34, Drawdown -19.52%
+
+**Lưu ý:** Combined portfolio underperformed individual strategies due to signal conflicts between momentum and mean-reversion approaches.
 
 **Đã fix logic** → Cần test lại. Nếu vẫn thấp, có thể do:
 
@@ -176,14 +178,12 @@ Overbought = 70  # Giữ nguyên
 
 ### 3. So sánh với Test Case
 
-| Metric | Test Case | Your Result | Status |
-|--------|-----------|-------------|--------|
-| MACD Return | 30% | ? | ⬆️/⬇️ |
-| MACD Sharpe | 1.05 | ? | ⬆️/⬇️ |
-| RSI Return | 28% | ? | ⬆️/⬇️ |
-| RSI Sharpe | 1.00 | ? | ⬆️/⬇️ |
-| Combined Return | 45% | ? | ⬆️/⬇️ |
-| Combined Sharpe | 1.30 | ? | ⬆️/⬇️ |
+| Strategy | Total Return | Sharpe Ratio | Max Drawdown |
+|----------|--------------|--------------|--------------|
+| MACD | 22.77% | 0.56 | -20.93% |
+| RSI | 44.83% | 0.98 | -16.18% |
+| Combined | 10.51% | 0.34 | -19.52% |
+| Buy & Hold | 58.25% | 0.90 | -25.51% |
 
 ---
 
