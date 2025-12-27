@@ -37,12 +37,12 @@ Instead of testing strategies one-by-one, this platform runs them **in parallel*
 - Multi-threaded for speed
 
 ### 📊 Built-in Strategies
-- MACD Crossover (12, 26, 9) - Momentum strategy
-- RSI Mean-Reversion (Period 14) - Mean-reversion strategy
+- MACD Crossover (12, 26, 9) - Momentum strategy (Strategy A)
+- RSI Mean-Reversion (Period 14) - Mean-reversion strategy (Strategy B)
 - Bollinger Bands (20, σ=2) - Volatility strategy
-- SMA Crossover (10/30) - Trend strategy *Updated: Changed from 50/200 to 10/30 for better compatibility with sample data*
+- SMA Crossover (50/200) - Trend strategy (Golden/Death cross)
 - **Buy & Hold** - Benchmark strategy (buy at start, hold until end)
-- **Combined Portfolio** - Equal-weight combination of multiple strategies
+- **Combined Portfolio (A+B)** - Equal-weight combination of MACD + RSI strategies
 
 ### 📈 Advanced Analytics
 - Sharpe ratio, Max drawdown, Win rate

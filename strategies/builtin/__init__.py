@@ -49,7 +49,7 @@ STRATEGIES = {
     },
     'SMA Crossover': {
         'function': sma_crossover,
-        'params': {'short_window': 10, 'long_window': 30},
+        'params': {'short_window': 50, 'long_window': 200},
         'description': 'Golden/Death cross detection',
         'type': 'Trend'
     },

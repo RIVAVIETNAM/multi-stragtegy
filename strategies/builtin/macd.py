@@ -29,11 +29,24 @@ def macd_crossover(data: pd.DataFrame, fast: int = 12, slow: int = 26, signal: i
     # Generate signals
     signals = pd.Series(0, index=data.index)
     
-    # Buy when MACD crosses above signal
-    signals[(macd_line > signal_line) & (macd_line.shift(1) <= signal_line.shift(1))] = 1
+    # Track position state
+    in_long = False
     
-    # Sell when MACD crosses below signal
-    signals[(macd_line < signal_line) & (macd_line.shift(1) >= signal_line.shift(1))] = -1
+    for i in range(1, len(data)):
+        prev_macd = macd_line.iloc[i-1]
+        curr_macd = macd_line.iloc[i]
+        prev_signal = signal_line.iloc[i-1]
+        curr_signal = signal_line.iloc[i]
+        
+        # Buy signal: MACD crosses above signal
+        if not in_long and curr_macd > curr_signal and prev_macd <= prev_signal:
+            signals.iloc[i] = 1
+            in_long = True
+        
+        # Sell signal: MACD crosses below signal
+        elif in_long and curr_macd < curr_signal and prev_macd >= prev_signal:
+            signals.iloc[i] = -1
+            in_long = False
     
     return signals
 

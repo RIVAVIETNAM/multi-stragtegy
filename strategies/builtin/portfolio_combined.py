@@ -61,11 +61,13 @@ def portfolio_combined(data: pd.DataFrame,
     for sig, weight in zip(aligned_signals, weights):
         combined += sig * weight
     
-    # Convert to discrete signals
-    # Buy if combined > 0.3, Sell if combined < -0.3, else Hold
+    # Convert to discrete signals using majority vote
+    # If combined > 0: Buy (at least one strategy says buy)
+    # If combined < 0: Sell (at least one strategy says sell)
+    # If combined == 0: Hold (strategies agree to hold or conflict)
     final_signals = pd.Series(0, index=common_index)
-    final_signals[combined > 0.3] = 1
-    final_signals[combined < -0.3] = -1
+    final_signals[combined > 0] = 1  # Buy if any strategy says buy
+    final_signals[combined < 0] = -1  # Sell if any strategy says sell
     
     return final_signals
 

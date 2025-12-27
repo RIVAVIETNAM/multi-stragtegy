@@ -11,6 +11,8 @@ Hướng dẫn sử dụng platform:
 - **[Streamlit Platform Guide](guides/STREAMLIT_GUIDE.md)** - Hướng dẫn chi tiết sử dụng Streamlit app
 - **[Deployment Guide](guides/DEPLOYMENT.md)** - Hướng dẫn deploy lên cloud
 - **[Test Case Setup Guide](guides/TEST_CASE_SETUP.md)** - Hướng dẫn tạo kết quả test case
+- **[Strategy Mapping Guide](guides/STRATEGY_MAPPING.md)** - Ánh xạ Test Case → Implementation
+- **[Parameter Tuning Guide](guides/PARAMETER_TUNING.md)** - Hướng dẫn điều chỉnh tham số
 - **[User Guide (Vietnamese)](USER_GUIDE_VI.md)** - Hướng dẫn bằng tiếng Việt
 
 ### ✨ Features (`features/`)
